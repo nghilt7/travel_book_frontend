@@ -1,12 +1,15 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useSelector } from "react-redux";
 
 import { NavLink, Link } from "react-router-dom";
 
 import "./Header.scss";
 
 function Header() {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
   return (
     <div className="header-container">
       <Navbar bg="light" expand="lg">
@@ -26,12 +29,25 @@ function Header() {
             </Nav>
           </Navbar.Collapse>
           <Nav className="ms-auto d-none d-lg-inline-flex">
-            <NavLink className="nav-link" to="/login">
-              Login
-            </NavLink>
-            <NavLink className="nav-link" to="/register">
-              Register
-            </NavLink>
+            {isAuthenticated ? (
+              <>
+                <NavLink className="nav-link" to="/logout">
+                  Logout
+                </NavLink>
+                <NavLink className="nav-link" to="/profile">
+                  Profile
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink className="nav-link" to="/login">
+                  Login
+                </NavLink>
+                <NavLink className="nav-link" to="/register">
+                  Register
+                </NavLink>
+              </>
+            )}
           </Nav>
         </Container>
       </Navbar>

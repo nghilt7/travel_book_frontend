@@ -1,7 +1,7 @@
 .header-container {
   .navbar {
     z-index: 100;
-    background-color: transparent !important;
+    background-color: #000 !important;
 
     .navbar-brand {
       font-size: 30px;
@@ -12,7 +12,11 @@
     .nav-link {
       font-size: 20px;
       font-weight: 300;
-      color: #f9f9f9;
+      color: yellow;
+
+      &.active {
+        color: red;
+      }
     }
   }
 }

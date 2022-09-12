@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 import "./Login.scss";
 import validateEmail from "./../../utils/validateEmail";
 import { postLogin } from "../../services/apiServices";
+import { doLogin } from "./../../redux/reducer/User/user.actions";
 
 const Login = () => {
   const defaultValid = {
@@ -18,6 +20,7 @@ const Login = () => {
 
   // hook
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // handle
   const handleSubmitForm = async (event) => {
@@ -44,6 +47,7 @@ const Login = () => {
     const res = await postLogin(email, password);
     if (res && +res.EC === 0) {
       toast.success(res.EM);
+      dispatch(doLogin(res.DT));
       navigate("/");
       return;
     }

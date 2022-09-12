@@ -1,0 +1,110 @@
+.trip-container {
+  .body {
+    .body-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .search {
+        position: relative;
+
+        .search-icon {
+          position: absolute;
+          cursor: pointer;
+          right: 0;
+          color: rgb(87, 87, 175);
+        }
+
+        .search-input {
+          border: none;
+          padding-right: 70px;
+          outline: none;
+          border-bottom: 1px solid #ccc;
+          width: 20rem;
+        }
+      }
+
+      .add-icon {
+        font-size: 40px;
+        cursor: pointer;
+      }
+    }
+
+    .trip-detail {
+      .infor {
+        display: flex;
+        justify-content: space-between;
+
+        .place {
+          font-size: 20px;
+          font-weight: 500;
+
+          i {
+            color: #7f8583;
+            font-size: 25px;
+          }
+        }
+
+        .time {
+          font-size: 20px;
+          font-weight: 300;
+        }
+      }
+
+      .action {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+
+        .edit {
+          cursor: pointer;
+          font-size: 25px;
+          &:hover {
+            color: blue;
+          }
+        }
+
+        .trash {
+          font-size: 25px;
+          cursor: pointer;
+          &:hover {
+            color: red;
+          }
+        }
+      }
+
+      .costs {
+        .title {
+          font-size: 25px;
+          font-weight: 500;
+
+          i {
+            color: #ffd700;
+          }
+        }
+
+        li {
+          font-size: 20px;
+          display: flex;
+          justify-content: space-between;
+
+          .edit {
+            cursor: pointer;
+
+            &:hover {
+              color: blue;
+            }
+          }
+
+          .trash {
+            cursor: pointer;
+
+            &:hover {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
