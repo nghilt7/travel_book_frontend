@@ -19,6 +19,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isValidForm, setIsValidForm] = useState(defaultValid);
 
@@ -63,9 +64,11 @@ const Register = () => {
     }
 
     // call api
+    setIsLoading(true);
     const res = await postRegister(email, username, password);
     if (res && +res.EC === 0) {
       toast.success(res.EM);
+      setIsLoading(false);
       navigate("/login");
       return;
     }
@@ -150,8 +153,16 @@ const Register = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary col-12 col-lg-3">
-              Register
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="btn btn-primary col-12 col-lg-3"
+            >
+              {isLoading ? (
+                <i class="fa-solid fa-spinner loader-icon"></i>
+              ) : (
+                <span>Register</span>
+              )}
             </button>
 
             <div className="mt-3">

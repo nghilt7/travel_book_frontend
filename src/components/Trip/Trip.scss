@@ -27,6 +27,10 @@
       .add-icon {
         font-size: 40px;
         cursor: pointer;
+
+        &:hover {
+          color: rgb(56, 56, 123);
+        }
       }
     }
 
@@ -60,7 +64,7 @@
           cursor: pointer;
           font-size: 25px;
           &:hover {
-            color: blue;
+            color: rgb(129, 129, 229);
           }
         }
 
@@ -68,7 +72,7 @@
           font-size: 25px;
           cursor: pointer;
           &:hover {
-            color: red;
+            color: rgb(246, 100, 100);
           }
         }
       }
@@ -92,7 +96,7 @@
             cursor: pointer;
 
             &:hover {
-              color: blue;
+              color: rgb(129, 129, 229);
             }
           }
 
@@ -100,7 +104,7 @@
             cursor: pointer;
 
             &:hover {
-              color: red;
+              color: rgb(246, 100, 100);
             }
           }
         }

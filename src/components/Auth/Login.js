@@ -17,6 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValidForm, setIsValidForm] = useState(defaultValid);
+  const [isLoading, setIsLoading] = useState(false);
 
   // hook
   const navigate = useNavigate();
@@ -44,9 +45,11 @@ const Login = () => {
     }
 
     // call api
+    setIsLoading(true);
     const res = await postLogin(email, password);
     if (res && +res.EC === 0) {
       toast.success(res.EM);
+      setIsLoading(false);
       dispatch(doLogin(res.DT));
       navigate("/");
       return;
@@ -103,8 +106,16 @@ const Login = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary col-12 col-lg-3">
-              Login
+            <button
+              disabled={isLoading}
+              type="submit"
+              className="btn btn-primary col-12 col-lg-3"
+            >
+              {isLoading ? (
+                <i class="fa-solid fa-spinner loader-icon"></i>
+              ) : (
+                <span>Login</span>
+              )}
             </button>
 
             <div className="mt-3">
