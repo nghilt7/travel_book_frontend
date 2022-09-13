@@ -10,10 +10,17 @@ const postRegister = async (email, username, password) => {
   return await axios.post(`api/v1/register`, { email, username, password });
 };
 
+const postLogout = async () => {
+  return await axios.post(`api/v1/logout`);
+};
 // TRIP
 
 const getAllTrips = async () => {
   return await axios.get(`api/v1/trip/read`);
+};
+
+const getTripWithUserId = async (userId) => {
+  return await axios(`api/v1/trip/${userId}`);
 };
 
 const postCreateNewTrip = async (
@@ -85,10 +92,12 @@ export {
   postLogin,
   postRegister,
   getAllTrips,
+  getTripWithUserId,
   deleteTrip,
   postCreateNewTrip,
   putUpdateTrip,
   postCreateNewCost,
   deleteCost,
   putUpdateCost,
+  postLogout,
 };

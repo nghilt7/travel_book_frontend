@@ -1,14 +1,34 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { NavLink, Link } from "react-router-dom";
+import { postLogout } from "../../services/apiServices";
 
 import "./Header.scss";
+import { toast } from "react-toastify";
+import { doLogout } from "../../redux/reducer/User/user.actions";
 
 function Header() {
+  // hooke
+  const navigate = useNavigate();
+
+  // redux
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  const handleLogout = async () => {
+    let res = await postLogout();
+    if (res && +res.EC === 0) {
+      toast.success("Logout successfully");
+      dispatch(doLogout());
+      navigate("/");
+    } else {
+      toast.error(res.EM);
+    }
+  };
 
   return (
     <div className="header-container">
@@ -31,7 +51,11 @@ function Header() {
           <Nav className="ms-auto d-none d-lg-inline-flex">
             {isAuthenticated ? (
               <>
-                <NavLink className="nav-link" to="/logout">
+                <NavLink
+                  className="nav-link"
+                  to="/logout"
+                  onClick={() => handleLogout()}
+                >
                   Logout
                 </NavLink>
                 <NavLink className="nav-link" to="/profile">

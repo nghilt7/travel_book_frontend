@@ -18,10 +18,7 @@ function ModalAddNewCost(props) {
   const [costValue, setCostValue] = useState("");
   const [costDescription, setCostDescription] = useState("");
 
-  const [selectedOption, setSelectedOption] = useState({
-    value: "FOOD",
-    label: "Food",
-  });
+  const [selectedOption, setSelectedOption] = useState({});
 
   const [isValidForm, setIsValidForm] = useState(defaultValid);
 
@@ -51,6 +48,8 @@ function ModalAddNewCost(props) {
       costDescription,
       dataModalAddNewCost.id
     );
+
+    console.log(">>>", dataModalAddNewCost);
 
     if (res && +res.EC === 0) {
       toast.success(res.EM);
