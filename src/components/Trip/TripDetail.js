@@ -1,9 +1,31 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
+import { toast } from "react-toastify";
+
+import { deleteCost } from "../../services/apiServices";
 
 const TripDetail = (props) => {
   // props data
-  const { index, trip, handleDeleteTrip } = props;
+  const {
+    index,
+    trip,
+    handleDeleteTrip,
+    handleUpdateTrip,
+    handleAddNewCost,
+    fetchAllTrips,
+    handleUpdateCost,
+  } = props;
+
+  // handle
+  const handleDeleteCost = async (cost) => {
+    let res = await deleteCost(cost.id);
+    if (res && +res.EC === 0) {
+      toast.success(res.EM);
+      fetchAllTrips();
+    } else {
+      toast.error(res.EM);
+    }
+  };
 
   return (
     <>
@@ -21,7 +43,10 @@ const TripDetail = (props) => {
             </div>
           </div>
           <div className="action mt-3">
-            <i className="fa-solid fa-pen edit"></i>
+            <i
+              className="fa-solid fa-pen edit"
+              onClick={() => handleUpdateTrip(trip)}
+            ></i>
             <i
               className="fa-solid fa-trash-can trash"
               onClick={() => handleDeleteTrip(trip)}
@@ -29,7 +54,11 @@ const TripDetail = (props) => {
           </div>
           <div className="costs">
             <span className="title">
-              <i className="fa-solid fa-dollar-sign me-3 mt-5"></i>
+              <i
+                role="button"
+                className="fa-solid fa-dollar-sign me-3 mt-5 "
+                onClick={() => handleAddNewCost(trip)}
+              ></i>
               Costs
             </span>
             <ul>
@@ -42,8 +71,14 @@ const TripDetail = (props) => {
                         {cost.costType}: {cost.costValue}$
                       </span>
                       <div>
-                        <i className="fa-solid fa-pen-to-square me-3 edit"></i>
-                        <i className="fa-solid fa-trash trash"></i>
+                        <i
+                          className="fa-solid fa-pen-to-square me-3 edit"
+                          onClick={() => handleUpdateCost(cost)}
+                        ></i>
+                        <i
+                          className="fa-solid fa-trash trash"
+                          onClick={() => handleDeleteCost(cost)}
+                        ></i>
                       </div>
                     </li>
                   );

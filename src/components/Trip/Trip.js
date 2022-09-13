@@ -8,6 +8,9 @@ import "./Trip.scss";
 import TripDetail from "./TripDetail";
 import ModalAddNewTrip from "./Modal/ModalAddNewTrip";
 import ModalDeleteTrip from "./Modal/ModalDeleteTrip";
+import ModalUpdateTrip from "./Modal/ModalUpdateTrip";
+import ModalAddNewCost from "./Modal/ModalAddNewCost";
+import ModalUpdateCost from "./Modal/ModalUpdateCost";
 
 const Trip = () => {
   // State
@@ -16,8 +19,14 @@ const Trip = () => {
   // Modal
   const [isShowModalAddNewTrip, setIsShowModalAddNewTrip] = useState(false);
   const [isShowModalDeleteTrip, setIsShowModalDeleteTrip] = useState(false);
+  const [isShowModalUpdateTrip, setIsShowModalUpdateTrip] = useState(false);
+  const [isShowModalAddNewCost, setIsShowModalAddNewCost] = useState(false);
+  const [isShowModalUpdateCost, setIsShowModalUpdateCost] = useState(false);
 
   const [dataModalDeleteTrip, setDataModalDeleteTrip] = useState({});
+  const [dataModalUpdateTrip, setDataModalUpdateTrip] = useState({});
+  const [dataModalAddNewCost, setDataModalAddNewCost] = useState({});
+  const [dataModalUpdateCost, setDataModalUpdateCost] = useState({});
 
   // hook
   useEffect(() => {
@@ -38,6 +47,22 @@ const Trip = () => {
   const handleDeleteTrip = (trip) => {
     setIsShowModalDeleteTrip(true);
     setDataModalDeleteTrip(trip);
+  };
+
+  const handleUpdateTrip = (trip) => {
+    setDataModalUpdateTrip(trip);
+    setIsShowModalUpdateTrip(true);
+  };
+
+  // cost
+  const handleAddNewCost = (trip) => {
+    setDataModalAddNewCost(trip);
+    setIsShowModalAddNewCost(true);
+  };
+
+  const handleUpdateCost = (cost) => {
+    setDataModalUpdateCost(cost);
+    setIsShowModalUpdateCost(true);
   };
 
   return (
@@ -69,6 +94,10 @@ const Trip = () => {
                   index={index}
                   trip={trip}
                   handleDeleteTrip={handleDeleteTrip}
+                  handleUpdateTrip={handleUpdateTrip}
+                  handleAddNewCost={handleAddNewCost}
+                  fetchAllTrips={fetchAllTrips}
+                  handleUpdateCost={handleUpdateCost}
                 />
               );
             })}
@@ -83,6 +112,24 @@ const Trip = () => {
         show={isShowModalDeleteTrip}
         setShow={setIsShowModalDeleteTrip}
         dataModalDeleteTrip={dataModalDeleteTrip}
+        fetchAllTrips={fetchAllTrips}
+      />
+      <ModalUpdateTrip
+        show={isShowModalUpdateTrip}
+        setShow={setIsShowModalUpdateTrip}
+        dataModalUpdateTrip={dataModalUpdateTrip}
+        fetchAllTrips={fetchAllTrips}
+      />
+      <ModalAddNewCost
+        show={isShowModalAddNewCost}
+        setShow={setIsShowModalAddNewCost}
+        dataModalAddNewCost={dataModalAddNewCost}
+        fetchAllTrips={fetchAllTrips}
+      />
+      <ModalUpdateCost
+        show={isShowModalUpdateCost}
+        setShow={setIsShowModalUpdateCost}
+        dataModalUpdateCost={dataModalUpdateCost}
         fetchAllTrips={fetchAllTrips}
       />
     </div>

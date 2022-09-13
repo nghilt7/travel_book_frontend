@@ -34,8 +34,61 @@ const postCreateNewTrip = async (
   });
 };
 
+const putUpdateTrip = async (
+  id,
+  startPlace,
+  startDate,
+  destination,
+  duration
+) => {
+  return await axios.put(`api/v1/trip/update`, {
+    id,
+    startPlace,
+    startDate,
+    destination,
+    duration,
+  });
+};
+
 const deleteTrip = async (tripId) => {
   return await axios.delete(`api/v1/trip/delete`, { data: { id: tripId } });
 };
 
-export { postLogin, postRegister, getAllTrips, deleteTrip, postCreateNewTrip };
+// Cost
+const postCreateNewCost = async (
+  costType,
+  costValue,
+  costDescription,
+  tripId
+) => {
+  return await axios.post(`api/v1/cost/create`, {
+    costType,
+    costValue,
+    costDescription,
+    tripId,
+  });
+};
+
+const deleteCost = async (id) => {
+  return await axios.delete(`api/v1/cost/delete`, { data: { id } });
+};
+
+const putUpdateCost = async (id, costValue, costDescription) => {
+  return await axios.put(`api/v1/cost/update`, {
+    id,
+    costValue,
+    costDescription,
+  });
+};
+
+export {
+  postLogin,
+  postRegister,
+  getAllTrips,
+  deleteTrip,
+  postCreateNewTrip,
+  putUpdateTrip,
+  postCreateNewCost,
+  deleteCost,
+  putUpdateCost,
+};
