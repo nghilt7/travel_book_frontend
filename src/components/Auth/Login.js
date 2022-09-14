@@ -18,6 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isValidForm, setIsValidForm] = useState(defaultValid);
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   // hook
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ const Login = () => {
     }
 
     toast.error(res.EM);
+    setIsLoading(false);
   };
 
   return (
@@ -93,17 +95,30 @@ const Login = () => {
             </div>
             <div className="form-group col-12 col-lg-3">
               <label>Password</label>
-              <input
-                type="password"
-                className={
-                  isValidForm.validPassword
-                    ? "form-control"
-                    : "form-control is-invalid"
-                }
-                placeholder="Password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <div className="form-password">
+                <input
+                  type={isShowPassword ? "text" : "password"}
+                  className={
+                    isValidForm.validPassword
+                      ? "form-control"
+                      : "form-control is-invalid"
+                  }
+                  placeholder="Password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                {isShowPassword ? (
+                  <i
+                    class="fa-solid fa-eye"
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  ></i>
+                ) : (
+                  <i
+                    class="fa-solid fa-eye-slash"
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  ></i>
+                )}
+              </div>
             </div>
 
             <button
@@ -112,7 +127,7 @@ const Login = () => {
               className="btn btn-primary col-12 col-lg-3"
             >
               {isLoading ? (
-                <i class="fa-solid fa-spinner loader-icon"></i>
+                <i className="fa-solid fa-spinner loader-icon"></i>
               ) : (
                 <span>Login</span>
               )}

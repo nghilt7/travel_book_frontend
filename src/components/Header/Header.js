@@ -3,16 +3,21 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 import { NavLink, Link } from "react-router-dom";
 import { postLogout } from "../../services/apiServices";
-
-import "./Header.scss";
-import { toast } from "react-toastify";
 import { doLogout } from "../../redux/reducer/User/user.actions";
 
+import "./Header.scss";
+import ModalChangeProfile from "./Modal/ModalChangeProfile";
+
 function Header() {
-  // hooke
+  // state
+  const [isShowModalChangeProfile, setIsShowModalChangeProfile] =
+    useState(false);
+  // hook
   const navigate = useNavigate();
 
   // redux
@@ -58,9 +63,12 @@ function Header() {
                 >
                   Logout
                 </NavLink>
-                <NavLink className="nav-link" to="/profile">
+                <span
+                  className="nav-link"
+                  onClick={() => setIsShowModalChangeProfile(true)}
+                >
                   Profile
-                </NavLink>
+                </span>
               </>
             ) : (
               <>
@@ -75,6 +83,10 @@ function Header() {
           </Nav>
         </Container>
       </Navbar>
+      <ModalChangeProfile
+        show={isShowModalChangeProfile}
+        setShow={setIsShowModalChangeProfile}
+      />
     </div>
   );
 }

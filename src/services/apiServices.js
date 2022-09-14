@@ -13,6 +13,19 @@ const postRegister = async (email, username, password) => {
 const postLogout = async () => {
   return await axios.post(`api/v1/logout`);
 };
+
+const postChangeProfile = async (id, username) => {
+  return await axios.post(`api/v1/change-profile`, { id, username });
+};
+
+const postChangePassword = async (id, currentPassword, newPassword) => {
+  return await axios.post(`api/v1/change-password`, {
+    id,
+    currentPassword,
+    newPassword,
+  });
+};
+
 // TRIP
 
 const getAllTrips = async () => {
@@ -100,4 +113,6 @@ export {
   deleteCost,
   putUpdateCost,
   postLogout,
+  postChangeProfile,
+  postChangePassword,
 };

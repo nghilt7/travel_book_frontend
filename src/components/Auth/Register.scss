@@ -54,6 +54,17 @@
         margin-right: 7px;
         top: 2px;
       }
+
+      .form-password {
+        position: relative;
+
+        i {
+          position: absolute;
+          top: 11px;
+          right: 10px;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

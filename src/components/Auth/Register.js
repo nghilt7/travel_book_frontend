@@ -20,6 +20,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
 
   const [isValidForm, setIsValidForm] = useState(defaultValid);
 
@@ -74,6 +76,7 @@ const Register = () => {
     }
 
     toast.error(res.EM);
+    setIsLoading(false);
   };
 
   return (
@@ -126,31 +129,62 @@ const Register = () => {
 
             <div className="form-group col-12 col-lg-3">
               <label>Password</label>
-              <input
-                type="password"
-                className={
-                  isValidForm.validPassword
-                    ? "form-control"
-                    : "form-control is-invalid"
-                }
-                placeholder="Password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <div className="form-password">
+                <input
+                  type={isShowPassword ? "text" : "password"}
+                  className={
+                    isValidForm.validPassword
+                      ? "form-control"
+                      : "form-control is-invalid"
+                  }
+                  placeholder="Password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+
+                {isShowPassword ? (
+                  <i
+                    class="fa-solid fa-eye"
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  ></i>
+                ) : (
+                  <i
+                    class="fa-solid fa-eye-slash"
+                    onClick={() => setIsShowPassword(!isShowPassword)}
+                  ></i>
+                )}
+              </div>
             </div>
             <div className="form-group col-12 col-lg-3">
               <label>Confirm Password</label>
-              <input
-                type="password"
-                className={
-                  isValidForm.validConfirmPassword
-                    ? "form-control"
-                    : "form-control is-invalid"
-                }
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
-              />
+              <div className="form-password">
+                <input
+                  type={isShowConfirmPassword ? "text" : "password"}
+                  className={
+                    isValidForm.validConfirmPassword
+                      ? "form-control"
+                      : "form-control is-invalid"
+                  }
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                />
+                {isShowConfirmPassword ? (
+                  <i
+                    class="fa-solid fa-eye"
+                    onClick={() =>
+                      setIsShowConfirmPassword(!isShowConfirmPassword)
+                    }
+                  ></i>
+                ) : (
+                  <i
+                    class="fa-solid fa-eye-slash"
+                    onClick={() =>
+                      setIsShowConfirmPassword(!isShowConfirmPassword)
+                    }
+                  ></i>
+                )}
+              </div>
             </div>
 
             <button
@@ -159,7 +193,7 @@ const Register = () => {
               className="btn btn-primary col-12 col-lg-3"
             >
               {isLoading ? (
-                <i class="fa-solid fa-spinner loader-icon"></i>
+                <i className="fa-solid fa-spinner loader-icon"></i>
               ) : (
                 <span>Register</span>
               )}
